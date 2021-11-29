@@ -26,10 +26,10 @@ void opcontrol() {
     }
     else{
       if(takeIn.isPressed()){
-        intake.moveVoltage(-10000);
+        frontIntakeClampDown();
       }
       else if(takeOut.isPressed()){
-        intake.moveVoltage(10000);
+        frontIntakeUp();
       }
       else{
         intake.moveVoltage(0);
@@ -41,16 +41,15 @@ void opcontrol() {
     }
     else{
       if(liftUp.isPressed()){
-        lift.moveVelocity(100);
+        liftMoveUp();
       }
       else if(liftDown.isPressed()){
-        lift.moveVelocity(-100);
+        liftMoveDown();
       }
       else{
         lift.moveVelocity(0);
       }
     }
-
     delay(10);
   }
 }
