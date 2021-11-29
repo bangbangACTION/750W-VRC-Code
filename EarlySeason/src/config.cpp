@@ -36,7 +36,7 @@ okapi::ControllerButton liftUp(ControllerDigital::up);
 okapi::ControllerButton liftDown(ControllerDigital::down);
 
 okapi::MotorGroup lift({liftL, liftR});
-okapi::Potentiometer Potentiometer('B');
+okapi::Potentiometer pot('B');
 okapi::ADIButton intakeLimitSwitch('A');
 okapi::ADIButton liftLimitSwitch('C');
 
