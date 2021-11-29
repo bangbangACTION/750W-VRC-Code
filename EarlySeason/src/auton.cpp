@@ -65,4 +65,4 @@ void auton(){
   bR.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
   intake.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
 }
-void auton_selector();
+void auton_selector(){}
