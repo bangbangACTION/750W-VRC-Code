@@ -1,6 +1,7 @@
 #include "main.h"
 #include "config.h"
 void auton(){
+  moveDistance(200, 100);
   //1 - left side win point
   /*
   chassis->moveDistance(0.015_m);
@@ -65,4 +66,30 @@ void auton(){
   bR.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
   intake.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
 }
-void auton_selector(){}
+void auton_selector(){
+
+}
+void moveDistance(float spd, int time){
+  fL.moveVelocity(spd);
+  fR.moveVelocity(spd);
+  bL.moveVelocity(spd);
+  bR.moveVelocity(spd);
+  delay(time);
+}
+void frontIntakeUp(){
+  intake.moveVoltage(10000);
+  delay(75); //experiment with this value
+}
+void frontIntakeClampDown(){
+  intake.moveVoltage(10000);
+  delay(30); //experiment with this value
+}
+
+void liftMoveUp(){
+  lift.moveVelocity(100);
+  delay(30); //experiment with this value
+}
+void liftMoveDown(){
+  lift.moveVelocity(-100);
+  delay(30); //experiment with this value
+} 
