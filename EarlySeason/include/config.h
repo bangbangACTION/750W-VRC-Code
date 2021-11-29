@@ -31,3 +31,8 @@ extern okapi::ADIButton liftLimitSwitch;
 
 void auton();
 void auton_selector();
+void moveDistance(float spd, int time);
+void frontIntakeClampDown();
+void frontIntakeUp();
+void liftMoveUp();
+void liftMoveDown();
