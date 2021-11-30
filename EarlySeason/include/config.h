@@ -9,6 +9,10 @@ const int FRONT_INTAKE_MOTOR = 5;
 const int LEFT_LIFT_MOTOR = 11;
 const int RIGHT_LIFT_MOTOR = 20;
 
+const float kP = 0;
+const float kI = 0;
+const float kD = 0;
+
 extern okapi::Motor fL;
 extern okapi::Motor fR;
 extern okapi::Motor bL;
@@ -36,3 +40,6 @@ void frontIntakeClampDown();
 void frontIntakeUp();
 void liftMoveUp();
 void liftMoveDown();
+void turn_ccw(int time);
+void turn_cw(int time);
+void motionPID(float dist);
