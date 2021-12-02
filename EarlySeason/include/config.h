@@ -43,3 +43,4 @@ void liftMoveDown();
 void turn_ccw(int time);
 void turn_cw(int time);
 void motionPID(float dist);
+void stop();
