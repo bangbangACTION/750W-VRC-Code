@@ -1,8 +1,16 @@
 #include "main.h"
 #include "config.h"
+using namespace okapi;
 void auton(){
-  moveDistance(200, 75);
-  //delay(40);
+  chassis->setMaxVelocity(60);
+  while(!intakeLimitSwitch.isPressed()){
+    moveDistance(60, 25);
+  }
+  moveDistance(0, 25);
+  frontIntakeClampDown();
+  moveDistance(-60, 25);
+  chassis->setMaxVelocity(200);
+
   fL.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
   fR.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
   bL.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
@@ -17,8 +25,6 @@ void moveDistance(float spd, int time){
   fR.moveVelocity(spd);
   bL.moveVelocity(spd);
   bR.moveVelocity(spd);
-  delay(time);
-  stop();
 }
 void frontIntakeUp(){
   intake.moveVoltage(10000);
@@ -26,7 +32,7 @@ void frontIntakeUp(){
 }
 void frontIntakeClampDown(){
   intake.moveVoltage(-10000);
-  delay(30); //experiment with this value
+  delay(1000); //experiment with this value
 }
 
 void liftMoveUp(){
@@ -42,6 +48,8 @@ void stop(){
   fR.moveVelocity(0);
   bL.moveVelocity(0);
   bR.moveVelocity(0);
+  lift.moveVelocity(0);
+  intake.moveVoltage(0);
 }
 
 void turn_cw(int time){
