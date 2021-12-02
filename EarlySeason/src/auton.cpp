@@ -1,9 +1,8 @@
 #include "main.h"
 #include "config.h"
 void auton(){
-  moveDistance(200, 100);
-  turn_cw(40);
-  delay(40);
+  moveDistance(200, 75);
+  //delay(40);
   fL.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
   fR.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
   bL.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
@@ -19,13 +18,14 @@ void moveDistance(float spd, int time){
   bL.moveVelocity(spd);
   bR.moveVelocity(spd);
   delay(time);
+  stop();
 }
 void frontIntakeUp(){
   intake.moveVoltage(10000);
   delay(75); //experiment with this value
 }
 void frontIntakeClampDown(){
-  intake.moveVoltage(10000);
+  intake.moveVoltage(-10000);
   delay(30); //experiment with this value
 }
 
@@ -36,39 +36,47 @@ void liftMoveUp(){
 void liftMoveDown(){
   lift.moveVelocity(-100);
   delay(30); //experiment with this value
-} 
+}
+void stop(){
+  fL.moveVelocity(0);
+  fR.moveVelocity(0);
+  bL.moveVelocity(0);
+  bR.moveVelocity(0);
+}
 
 void turn_cw(int time){
-  fL.moveVelocity(200);
+  fL.moveVelocity(100);
   fR.moveVelocity(0);
-  bL.moveVelocity(200);
-  bR.moveVelocity(200);
+  bL.moveVelocity(100);
+  bR.moveVelocity(100);
   delay(time);
+  stop();
 }
 void turn_ccw(int time){
   fL.moveVelocity(0);
-  fR.moveVelocity(200);
-  bL.moveVelocity(200);
-  bR.moveVelocity(200);
+  fR.moveVelocity(100);
+  bL.moveVelocity(100);
+  bR.moveVelocity(100);
   delay(time);
+  stop();
 }
 
 void motionPID(float dist){
   float error, integral, prevError, derivative = 0;
-  float power = 150;
-  while((int)pot.controllerGet() != (int)dist){ 
+  float power = 100;
+  while((int)pot.controllerGet() != (int)dist){
     error = dist - pot.controllerGet();
     integral += error;
     if(error == 0 || (int)pot.controllerGet() == (int)dist){
       integral = 0;
     }
-    if(pot.controllerGet() > 10){ 
+    if(pot.controllerGet() > 10){ //if error is outside of useful range
       integral = 0;
     }
     derivative = integral - prevError;
     prevError = error;
     power = error*kP + integral*kI + derivative*kD;
     delay(15);
-    moveDistance(power, 10);
+    moveDistance(power, 15);
   }
 }
