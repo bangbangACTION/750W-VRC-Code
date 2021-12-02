@@ -12,6 +12,7 @@ void initialize() {
 void autonomous() {
   auton_selector();
   auton();
+  stop();
 }
 
 void opcontrol() {
@@ -39,6 +40,9 @@ void opcontrol() {
     if(liftLimitSwitch.isPressed()){
       lift.moveVelocity(0);
     }
+    //else if(pot.controllerGet() > a certain value){
+    //  lift.moveVelocity(0);
+    //}
     else{
       if(liftUp.isPressed()){
         liftMoveUp();
@@ -50,6 +54,8 @@ void opcontrol() {
         lift.moveVelocity(0);
       }
     }
+
+
     delay(10);
   }
 }
