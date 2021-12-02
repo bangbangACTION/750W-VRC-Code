@@ -19,8 +19,8 @@ okapi::Motor liftL(LEFT_LIFT_MOTOR, true, AbstractMotor::gearset::red, AbstractM
 okapi::Motor liftR(RIGHT_LIFT_MOTOR, false, AbstractMotor::gearset::red, AbstractMotor::encoderUnits::degrees);
 std::shared_ptr<okapi::ChassisController> chassis = ChassisControllerBuilder()
     .withMotors(
-        {bL, fL},
-        {bR, fR}
+        {fL, bL},
+        {fR, bR}
     ).withDimensions(
         AbstractMotor::gearset::green,
         {
@@ -36,6 +36,6 @@ okapi::ControllerButton liftUp(ControllerDigital::up);
 okapi::ControllerButton liftDown(ControllerDigital::down);
 
 okapi::MotorGroup lift({liftL, liftR});
-okapi::Potentiometer pot('B');
-okapi::ADIButton intakeLimitSwitch('A');
+okapi::Potentiometer pot('A');
+okapi::ADIButton intakeLimitSwitch('B');
 okapi::ADIButton liftLimitSwitch('C');
