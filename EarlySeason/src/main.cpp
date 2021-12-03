@@ -21,17 +21,21 @@ void opcontrol() {
       joystick.getAnalog(ControllerAnalog::leftY),
       joystick.getAnalog(ControllerAnalog::rightX)
     );
-
-    if(takeIn.isPressed()){
-      frontIntakeClampDown();
-    }
-    else if(takeOut.isPressed()){
-      frontIntakeUp();
+    if(intakeLimitSwitch.isPressed()){
+      intake.moveVoltage(10000);
     }
     else{
-      intake.moveVoltage(0);
+      if(takeIn.isPressed()){
+      frontIntakeClampDown();
+      }
+      else if(takeOut.isPressed()){
+        frontIntakeUp();
+      }
+      else{
+        intake.moveVoltage(0);
+      }
     }
-
+    
     if(liftLimitSwitch.isPressed()){
       lift.moveVelocity(0);
     }
