@@ -8,6 +8,7 @@ const int BACK_RIGHT_MOTOR = 14;
 const int FRONT_INTAKE_MOTOR = 5;
 const int LEFT_LIFT_MOTOR = 11;
 const int RIGHT_LIFT_MOTOR = 20;
+const int BACK_CLAW = 15;
 
 const float kP = 0;
 const float kI = 0;
@@ -27,11 +28,16 @@ extern okapi::ControllerButton takeIn;
 extern okapi::ControllerButton takeOut;
 extern okapi::ControllerButton liftUp;
 extern okapi::ControllerButton liftDown;
+extern okapi::ControllerButton clawOpen;
+extern okapi::ControllerButton clawClose;
 
 extern okapi::MotorGroup lift;
 extern okapi::Potentiometer pot;
 extern okapi::ADIButton intakeLimitSwitch;
 extern okapi::ADIButton liftLimitSwitch;
+extern okapi::ADIUltrasonic ultraLeft;
+extern okapi::ADIUltrasonic ultraRight;
+
 
 void auton();
 void auton_selector();
@@ -44,3 +50,5 @@ void turn_ccw(int time);
 void turn_cw(int time);
 void motionPID(float dist);
 void stop();
+void backClawClose();
+void backClawOpen();
