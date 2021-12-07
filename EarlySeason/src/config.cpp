@@ -7,6 +7,7 @@
 #define FRONT_INTAKE_MOTOR 5
 #define LEFT_LIFT_MOTOR 11
 #define RIGHT_LIFT_MOTOR 1
+#define BACK_CLAW 15
 
 using namespace okapi;
 
@@ -17,6 +18,7 @@ okapi::Motor bR(BACK_RIGHT_MOTOR, true, AbstractMotor::gearset::green, AbstractM
 okapi::Motor intake(FRONT_INTAKE_MOTOR, true, AbstractMotor::gearset::red, AbstractMotor::encoderUnits::degrees);
 okapi::Motor liftL(LEFT_LIFT_MOTOR, true, AbstractMotor::gearset::red, AbstractMotor::encoderUnits::degrees);
 okapi::Motor liftR(RIGHT_LIFT_MOTOR, false, AbstractMotor::gearset::red, AbstractMotor::encoderUnits::degrees);
+okapi::Motor claw(BACK_CLAW, false, AbstractMotor::gearset::red, AbstractMotor::encoderUnits::degrees);
 std::shared_ptr<okapi::ChassisController> chassis = ChassisControllerBuilder()
     .withMotors(
         {fL, bL},
@@ -34,8 +36,12 @@ okapi::ControllerButton takeIn(ControllerDigital::L1);
 okapi::ControllerButton takeOut(ControllerDigital::R1);
 okapi::ControllerButton liftUp(ControllerDigital::up);
 okapi::ControllerButton liftDown(ControllerDigital::down);
+okapi::ControllerButton clawOpen(ControllerDigital::left);
+okapi::ControllerButton clawClose(ControllerDigital::right);
 
 okapi::MotorGroup lift({liftL, liftR});
-okapi::Potentiometer pot('A');
-okapi::ADIButton intakeLimitSwitch('B');
-okapi::ADIButton liftLimitSwitch('C');
+okapi::ADIUltrasonic ultraRight('C', 'B'); //output - B, input - C
+okapi::Potentiometer pot('D');
+okapi::ADIButton intakeLimitSwitch('E');
+okapi::ADIUltrasonic ultraLeft('G', 'F'); //output - F, input - G
+okapi::ADIButton liftLimitSwitch('H');
