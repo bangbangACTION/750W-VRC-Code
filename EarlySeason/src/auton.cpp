@@ -2,20 +2,31 @@
 #include "config.h"
 using namespace okapi;
 void auton(){
-  chassis->setMaxVelocity(60);
-  while(!intakeLimitSwitch.isPressed()){
-    moveDistance(60, 25);
+  chassis->setMaxVelocity(40);
+  /*
+  while((int)ultraLeft.controllerGet() != (int)ultraRight.controllerGet()){
+    if((int)ultraLeft.controllerGet() > (int)ultraRight.controllerGet()){
+      fR.moveVelocity(5);
+      bR.moveVelocity(5);
+      delay(25);
+    }
+    else if((int)ultraLeft.controllerGet() < (int)ultraRight.controllerGet()){
+      fL.moveVelocity(5);
+      bL.moveVelocity(5);
+      delay(25);
+    }
   }
-  moveDistance(0, 25);
+  */
+  while(!intakeLimitSwitch.isPressed()){
+    moveDistance(40, 25);
+  }
+  stop();
   frontIntakeClampDown();
-  moveDistance(-60, 25);
-  chassis->setMaxVelocity(200);
-
-  fL.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
-  fR.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
-  bL.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
-  bR.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
-  intake.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
+  stop();
+  chassis->setMaxVelocity(-80);
+  moveDistance(-80, 2500);
+  stop();
+  chassis->setMaxVelocity(150);
 }
 void auton_selector(){
 
@@ -25,6 +36,7 @@ void moveDistance(float spd, int time){
   fR.moveVelocity(spd);
   bL.moveVelocity(spd);
   bR.moveVelocity(spd);
+  delay(time);
 }
 void frontIntakeUp(){
   intake.moveVoltage(10000);
@@ -34,7 +46,12 @@ void frontIntakeClampDown(){
   intake.moveVoltage(-10000);
   delay(1000); //experiment with this value
 }
-
+void backClawOpen(){
+  delay(1000);
+}
+void backClawClose(){
+  delay(1000);
+}
 void liftMoveUp(){
   lift.moveVelocity(100);
   delay(30); //experiment with this value
