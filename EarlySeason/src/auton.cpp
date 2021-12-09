@@ -2,7 +2,7 @@
 #include "config.h"
 using namespace okapi;
 void auton(){
-  turn_ccw(75);
+  turn_ccw(490);
   /*
   while((int)ultraLeft.controllerGet() != (int)ultraRight.controllerGet()){
     if((int)ultraLeft.controllerGet() > (int)ultraRight.controllerGet()){
@@ -118,9 +118,9 @@ void turn_cw(int time){
 }
 void turn_ccw(int time){
   fL.moveVelocity(0);
-  fR.moveVelocity(100);
-  bL.moveVelocity(100);
-  bR.moveVelocity(100);
+  fR.moveVelocity(150);
+  bL.moveVelocity(0);
+  bR.moveVelocity(150);
   delay(time);
   stop();
 }/*
