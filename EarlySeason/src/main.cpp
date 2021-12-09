@@ -10,7 +10,6 @@ void initialize() {
 }
 
 void autonomous() {
-  auton_selector();
   auton();
   stop();
 }
@@ -21,6 +20,7 @@ void opcontrol() {
       joystick.getAnalog(ControllerAnalog::leftY),
       joystick.getAnalog(ControllerAnalog::rightX)
     );
+    
     if(takeIn.isPressed()){
     frontIntakeClampDown();
     }
@@ -58,7 +58,6 @@ void opcontrol() {
     else{
       delay(10);
     }
-
 
     delay(10);
   }
