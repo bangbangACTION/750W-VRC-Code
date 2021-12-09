@@ -2,7 +2,7 @@
 #include "config.h"
 using namespace okapi;
 void auton(){
-  chassis->setMaxVelocity(40);
+  turn_ccw(75);
   /*
   while((int)ultraLeft.controllerGet() != (int)ultraRight.controllerGet()){
     if((int)ultraLeft.controllerGet() > (int)ultraRight.controllerGet()){
@@ -17,16 +17,55 @@ void auton(){
     }
   }
   */
-  while(!intakeLimitSwitch.isPressed()){
-    moveDistance(40, 25);
+  /*
+  while((int)ultraLeft.controllerGet() != (int)ultraRight.controllerGet()){
+    if((int)ultraLeft.controllerGet() > (int)ultraRight.controllerGet()){
+      fR.moveVelocity(5);
+      bR.moveVelocity(5);
+      delay(25);
+    }
+    else if((int)ultraLeft.controllerGet() < (int)ultraRight.controllerGet()){
+      fL.moveVelocity(5);
+      bL.moveVelocity(5);
+      delay(25);
+    }
   }
-  stop();
-  frontIntakeClampDown();
-  stop();
-  chassis->setMaxVelocity(-80);
-  moveDistance(-80, 2500);
-  stop();
-  chassis->setMaxVelocity(150);
+  */
+  /*
+    chassis->setMaxVelocity(60);
+    float count = 0;
+    while(!intakeLimitSwitch.isPressed()){
+      moveDistance(60, 25);
+      count += 25;
+    }
+    stop();
+    for(int i = 0; i < 10; i++)
+    frontIntakeClampDown();
+    stop();
+    chassis->setMaxVelocity(-60);
+    moveDistance(-60, count*(float)3/4);
+    stop();
+    frontIntakeUp();
+    stop();
+    chassis->setMaxVelocity(60);
+    turn_ccw(75);
+    moveDistance(60, count*(float)1/2);
+    turn_cw(count*(float)1/4);
+    count = 0;
+    while(!intakeLimitSwitch.isPressed()){
+      moveDistance(60, 25);
+      count += 25;
+    }
+    chassis->setMaxVelocity(-60);
+    moveDistance(-60, count*(float)3/4);
+    stop();
+    frontIntakeUp();
+    stop();
+    moveDistance(-60, count*(float)1/4);
+    stop();
+
+    chassis->setMaxVelocity(150);
+    */
 }
 void auton_selector(){
 
@@ -39,12 +78,12 @@ void moveDistance(float spd, int time){
   delay(time);
 }
 void frontIntakeUp(){
-  intake.moveVoltage(10000);
+  intake.moveVoltage(8000);
   delay(75); //experiment with this value
 }
 void frontIntakeClampDown(){
-  intake.moveVoltage(-10000);
-  delay(1000); //experiment with this value
+  intake.moveVoltage(-8000);
+  delay(75); //experiment with this value
 }
 void backClawOpen(){
   delay(1000);
@@ -84,8 +123,7 @@ void turn_ccw(int time){
   bR.moveVelocity(100);
   delay(time);
   stop();
-}
-
+}/*
 void motionPID(float dist){
   float error, integral, prevError, derivative = 0;
   float power = 100;
@@ -105,3 +143,4 @@ void motionPID(float dist){
     moveDistance(power, 15);
   }
 }
+*/
