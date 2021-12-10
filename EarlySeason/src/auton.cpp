@@ -66,6 +66,26 @@ void auton(){
 
     chassis->setMaxVelocity(150);
     */
+
+    chassis->setMaxVelocity(60);
+    float count = 0;
+    while(!intakeLimitSwitch.isPressed()){
+      moveDistance(60, 25);
+      count += 25;
+    }
+    stop();
+    for(int i = 0; i < 10; i++)
+    frontIntakeClampDown();
+    stop();
+    chassis->setMaxVelocity(-60);
+    moveDistance(-60, count*(float)3/4);
+    stop();
+    frontIntakeUp();
+    stop();
+    moveDistance(-60, count*(float)1/4);
+    stop();
+    chassis->setMaxVelocity(150);
+
 }
 void auton_selector(){
 
