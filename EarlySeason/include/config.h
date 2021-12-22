@@ -3,52 +3,49 @@
 
 const int FRONT_LEFT_MOTOR = 4;
 const int FRONT_RIGHT_MOTOR = 7;
-const int BACK_LEFT_MOTOR = 17;
-const int BACK_RIGHT_MOTOR = 14;
+const int BACK_LEFT_MOTOR = 13;
+const int BACK_RIGHT_MOTOR = 20;
 const int FRONT_INTAKE_MOTOR = 5;
-const int LEFT_LIFT_MOTOR = 11;
-const int RIGHT_LIFT_MOTOR = 20;
-const int BACK_CLAW = 15;
+const int LIFT_MOTOR = 1;
+const int BACK_INTAKE_MOTOR = 15;
 
 const float kP = 0;
 const float kI = 0;
 const float kD = 0;
 
-extern okapi::Motor fL;
-extern okapi::Motor fR;
-extern okapi::Motor bL;
-extern okapi::Motor bR;
-extern okapi::Motor intake;
-extern okapi::Motor liftL;
-extern okapi::Motor liftR;
+extern okapi::Motor drive_fL;
+extern okapi::Motor drive_fR;
+extern okapi::Motor drive_bL;
+extern okapi::Motor drive_bR;
+extern okapi::Motor front_intake;
+extern okapi::Motor back_intake;
+extern okapi::Motor lift;
 extern std::shared_ptr<okapi::ChassisController> chassis;
 
 extern okapi::Controller joystick;
-extern okapi::ControllerButton takeIn;
-extern okapi::ControllerButton takeOut;
+extern okapi::ControllerButton backTakeIn;
+extern okapi::ControllerButton backTakeOut;
+extern okapi::ControllerButton frontTakeIn;
+extern okapi::ControllerButton frontTakeOut;
 extern okapi::ControllerButton liftUp;
 extern okapi::ControllerButton liftDown;
-extern okapi::ControllerButton clawOpen;
-extern okapi::ControllerButton clawClose;
 
-extern okapi::MotorGroup lift;
-extern okapi::Potentiometer pot;
-extern okapi::ADIButton intakeLimitSwitch;
-extern okapi::ADIButton liftLimitSwitch;
-extern okapi::ADIUltrasonic ultraLeft;
-extern okapi::ADIUltrasonic ultraRight;
+extern okapi::ADIButton back_bumperswitch;
+extern okapi::ADIGyro gyro;
 
-
-void auton();
-void auton_selector();
-void moveDistance(float spd, int time);
-void frontIntakeClampDown();
-void frontIntakeUp();
-void liftMoveUp();
-void liftMoveDown();
-void turn_ccw(int time);
-void turn_cw(int time);
-void motionPID(float dist);
+int auton_selector();
+void mbl_goal();
+void left_win_point();
+void right_win_point();
+void new_auton_trial();
+void move_dist(float spd, int time);
+void front_clamp();
+void back_clamp();
+void front_unclamp();
+void back_unclamp();
+void lift_up();
+void lift_down();
+void turn_ccw(float spd, int time);
+void turn_cw(float spd, int time);
+void move_dist_pid(float dist);
 void stop();
-void backClawClose();
-void backClawOpen();
