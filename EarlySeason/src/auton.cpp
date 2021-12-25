@@ -95,24 +95,19 @@ drive backward a lil;
 put back clamp down;
 move forward a lil to clear alliance mogol from win point line
 */
-int auton_selector(){
-  joystick.clear();
+auton_selector(){
   joystick.setText(0, 0, "X - mbl, A - LWP, Y - RWP, B - None");
-  okapi::ControllerButton x(ControllerDigital::X);
-  okapi::ControllerButton a(ControllerDigital::A);
-  okapi::ControllerButton y(ControllerDigital::Y);
-  okapi::ControllerButton b(ControllerDigital::B);
   if(x.isPressed()){
-    return 0;
+    i = 0;
   }
   else if(a.isPressed()){
-    return 1;
+    i = 1;
   }
   else if(y.isPressed()){
-    return 2;
+    i = 2;
   }
   else{
-    return -1;
+    i = -1;
   }
   joystick.clear();
 }
