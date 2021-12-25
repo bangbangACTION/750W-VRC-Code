@@ -96,7 +96,8 @@ put back clamp down;
 move forward a lil to clear alliance mogol from win point line
 */
 int auton_selector(){
-  printf("X - mbl, A - LWP, Y - RWP, B - None");
+  joystick.clear();
+  joystick.setText(0, 0, "X - mbl, A - LWP, Y - RWP, B - None");
   okapi::ControllerButton x(ControllerDigital::X);
   okapi::ControllerButton a(ControllerDigital::A);
   okapi::ControllerButton y(ControllerDigital::Y);
@@ -113,6 +114,7 @@ int auton_selector(){
   else{
     return -1;
   }
+  joystick.clear();
 }
 
 /*
