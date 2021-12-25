@@ -21,6 +21,7 @@ extern okapi::Motor front_intake;
 extern okapi::Motor back_intake;
 extern okapi::Motor lift;
 extern std::shared_ptr<okapi::ChassisController> chassis;
+extern int i;
 
 extern okapi::Controller joystick;
 extern okapi::ControllerButton backTakeIn;
