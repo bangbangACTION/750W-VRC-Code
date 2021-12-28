@@ -59,6 +59,10 @@ void turn_ccw (float spd, int time){
 }
 
 void drive_PID(float dist){
+  const float kP = 0;
+  const float kI = 0;
+  const float kD = 0;
+  
   double error, prev_error, derivative, total_error, integral, motor_power;
   double drive_fL_pos = drive_fL.getPosition();
   double drive_fR_pos = drive_fR.getPosition();
