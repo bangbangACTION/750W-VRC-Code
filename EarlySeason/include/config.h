@@ -10,10 +10,6 @@ const int LEFT_LIFT_MOTOR = 1;
 const int RIGHT_LIFT_MOTOR = 19;
 const int BACK_INTAKE_MOTOR = 15;
 
-const float kP = 0;
-const float kI = 0;
-const float kD = 0;
-
 extern okapi::Motor drive_fL;
 extern okapi::Motor drive_fR;
 extern okapi::Motor drive_bL;
