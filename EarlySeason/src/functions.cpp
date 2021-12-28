@@ -41,7 +41,7 @@ void stop(){
   back_intake.moveVoltage(0);
 }
 
-void turn_cw(float spd, int time){
+void turn_cw (float spd, int time){
   drive_fL.moveVelocity(spd);
   drive_fR.moveVelocity(0);
   drive_bL.moveVelocity(spd);
@@ -49,7 +49,7 @@ void turn_cw(float spd, int time){
   delay(time);
   stop();
 }
-void turn_ccw(float spd, int time){
+void turn_ccw (float spd, int time){
   drive_fL.moveVelocity(0);
   drive_fR.moveVelocity(spd);
   drive_bL.moveVelocity(0);
@@ -58,8 +58,25 @@ void turn_ccw(float spd, int time){
   stop();
 }
 
-void motionPID(float dist){
+void drive_PID(float dist){
+  double error, prev_error, derivative, total_error, integral, motor_power;
+  double drive_fL_pos = drive_fL.getPosition();
+  double drive_fR_pos = drive_fR.getPosition();
+  double drive_bL_pos = drive_bL.getPosition();
+  double drive_bR_pos = drive_bR.getPosition();
 
+  double avg_pos = (drive_fL_pos + drive_fR_pos + drive_bL_pos + drive_bR_pos)/4.0;
+
+  double desired_val = 200; //degrees, convert distance needed to travel to degrees
+  error = avg_pos - desired_val;
+  derivative = error - prev_error;
+  tot_error += error;
+
+  motor_power = error*kP + derivate*kD + total_error*kI;
+  move_dist(motor_power, 25);
+
+  prev_error = error;
+  delay(20);
 }
 /*
 void motionPID(float dist){
